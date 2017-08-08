@@ -1,0 +1,21 @@
+<!--<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">-->
+  <!--<div ngModelGroup="userInfo">-->
+    <!--<div>Username:<input #username="ngModel" type="text" ngModel name="username"></div>-->
+    <!--<div>Zipcode:<input type="number"></div>-->
+  <!--</div>-->
+  <!--<div>Password:<input type="password"></div>-->
+  <!--<div>Confirm Password:<input type="password"></div>-->
+  <!--<button type="submit">Register</button>-->
+<!--</form>-->
+<!--<div>{{myForm.value | json}}</div>-->
+<!--<div>{{username.value}}</div>-->
+
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
+  <div>Username:<input type="text" ngModel name="username"></div>
+  <div>Mobile:<input type="number" ngModel name="mobile"></div>
+  <div ngModelGroup="passwordsGroup">
+    <div>Password:<input type="password" ngModel name="password"></div>
+    <div>Confirm Password:<input type="password" ngModel name="pconfirm"></div>
+  </div>
+  <button type="submit">Register</button>
+</form>
