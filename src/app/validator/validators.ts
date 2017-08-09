@@ -19,6 +19,7 @@ export function mobileAsyncValidator(control: FormControl): any {
 }
 // 校验密码和密码验证是否相同
 export function equalValidator(group: FormGroup): any {
+
   let password: FormControl = group.get("password") as FormControl;
   let pconfirm: FormControl = group.get("pconfirm") as FormControl;
   let valid: boolean = (password.value === pconfirm.value);

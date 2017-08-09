@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-template-form',
@@ -7,11 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemplateFormComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {
   }
-  onSubmit(value: any) {
+  onSubmit(value: any, valid: boolean) {
     console.log(value);
+    console.log(valid);
+  }
+
+  mobileValid:boolean = true;
+  mobilePristine:boolean = true;
+  onMobileInput(form: NgForm) {
+    if (form) {
+      this.mobileValid = form.form.get("mobile").valid;
+      this.mobilePristine = form.form.get("mobile").pristine;
+    }
   }
 }

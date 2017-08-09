@@ -10,12 +10,31 @@
 <!--<div>{{myForm.value | json}}</div>-->
 <!--<div>{{username.value}}</div>-->
 
-<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
-  <div>Username:<input type="text" ngModel name="username"></div>
-  <div>Mobile:<input type="number" ngModel name="mobile"></div>
-  <div ngModelGroup="passwordsGroup">
-    <div>Password:<input type="password" ngModel name="password"></div>
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value, myForm.valid)">
+  <div>Username:<input type="text" ngModel required minlength="6" name="username"></div>
+  <div [hidden]="!myForm.form.hasError('required','username')">
+    用户名是必填项
+  </div>
+  <div [hidden]="!myForm.form.hasError('minlength','username')">
+    用户名最小长度是6
+  </div>
+  <div>Mobile:<input type="number" ngModel appMobileValidator name="mobile" (input)="onMobileInput(myForm)"></div>
+  <div [hidden]="mobileValid || mobilePristine">
+    <div [hidden]="!myForm.form.hasError('mobile','mobile')">
+      请输入正确的手机号
+    </div>
+  </div>
+
+  <div ngModelGroup="passwordsGroup" appEqualValidator>
+    <div>Password:<input type="password" ngModel minlength="6" name="password"></div>
+    <div [hidden]="!myForm.form.hasError('minlength',['passwordsGroup', 'password'])">
+      密码最小长度是6
+    </div>
     <div>Confirm Password:<input type="password" ngModel name="pconfirm"></div>
+    <div [hidden]="!myForm.form.hasError('equal','passwordsGroup')">
+      <!--密码不匹配-->
+      {{myForm.form.getError('equal','passwordsGroup')?.desc}}
+    </div>
   </div>
   <button type="submit">Register</button>
 </form>

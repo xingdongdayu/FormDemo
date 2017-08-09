@@ -35,7 +35,7 @@ export class ReactiveRegisterComponent implements OnInit {
   //   console.log("密码校验结果："+valid);
   //   return valid ? null : {equal: true};
   // }
-  // 使用FormBuilder工具
+  // 使用FormBuilder工具重写
   constructor(fb: FormBuilder) {
     this.formModel = fb.group({
       username: ['', [Validators.required, Validators.minLength(6)]],
